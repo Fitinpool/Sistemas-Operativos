@@ -1,5 +1,6 @@
 /*
 *
+* EJECUCION DEL PROGRAMA  gcc calendario.c -o calendario && ./calendario 
 *Julio Barra
 *Vania Vergara
 *
