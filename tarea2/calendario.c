@@ -100,10 +100,10 @@ int main()
     //VARIABLES
     int cantidadTareas, horas, diaLimite, horaLimite;
 
-    pthread_t ingresaDatos;
-
     printf("Ingrese la cantidad de tareas que tiene para la semana : ");
     scanf("%d", &cantidadTareas);
+
+    pthread_t ingresaDatos[cantidadTareas];
 
     struct tareas fechaTareas[cantidadTareas];
 
@@ -128,10 +128,13 @@ int main()
     //invocamos a los hilos de manera que el primero que agarre el recurso entre, no necesariamente sera el i = 0
     for(int i = 0; i < cantidadTareas; i++)
     {
-        pthread_create(&ingresaDatos, NULL, firstComeFirstServed, &fechaTareas[i]);
+        pthread_create(&ingresaDatos[i], NULL, firstComeFirstServed, &fechaTareas[i]);
     }
-
-    pthread_exit(NULL);
+    
+    for(int i = 0; i < cantidadTareas; i++)
+    {
+        pthread_join(ingresaDatos[i], NULL);
+    }
 
     return 0;
 }
